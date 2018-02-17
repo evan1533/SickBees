@@ -16,16 +16,22 @@ To write to a file:
 More Hotkeys:
 
 Movement
+
 h, j, k, l
 left, down, up, right
+
 $
 To the end of the line
+
 ^
 To the beginning of the line
+
 G
 To the end of the file
+
 :1
 To the beginning of the file
+
 :47
 To line 47
 
