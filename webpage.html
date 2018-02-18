@@ -2,10 +2,50 @@
 <html>
 <head>
   <script>
+  f = document.getElementById('some').files[0];
+  function fun() {
+    f = document.getElementById('some').files[0];
+    console.log(document.getElementById('some').files[0]);
+    var reader = new FileReader();
+
+    // Closure to capture the file information.
+    reader.onload = (function(theFile) {
+      return function(e) {
+        // Render thumbnail.
+        var span = document.createElement('span');
+        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                          '" title="', escape(theFile.name), '"/>'].join('');
+        document.getElementById('list').insertBefore(span, null);
+      };
+    })(f);
+    reader.readAsDataURL(f);
+    }
+    fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
+
+        // Create a FileWriter object for our FileSystemFileEntry (log.txt).
+        fileEntry.createWriter(function(fileWriter) {
+          fileWriter.onwriteend = function(e) {
+            console.log('Write completed.');
+          };
+
+          fileWriter.onerror = function(e) {
+            console.log('Write failed: ' + e.toString());
+          };
+
+          // Create a new Blob and write it to log.txt.
+          var bb = new BlobBuilder();
+          bb.append('Meow');
+
+          fileWriter.write(f);
+        }, errorHandler);
+}, errorHandler);
+    console.log("fjdl");
   </script>
   <meta charset="UTF-8">
   <title>The Three W's</title>
+  <!--
   <link rel="stylesheet" type="text/css" href="path to css stylesheet">
+-->
 </head>
 <body>
   <h1>
@@ -15,10 +55,13 @@
     Word, Were, Work.
   </h2>
   <div>
-    <input type="file" accept=".wav">
+    <form action="" method="get">
+      <input type="file" accept="" id="some">
+      <output id="list"></output>
+    </form>
   </div>
   <div>
-    <button>Submit</button>
+    <button onclick="fun()">Submit</button>
   </div>
   <p>Enter a .wav file above</p>
 </body>
