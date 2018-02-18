@@ -161,7 +161,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         return f
  
-def list_directory(self, path):
+    def list_directory(self, path):
         """Helper to produce a directory listing (absent index.html).
         Return value is either a file object, or None (indicating an
         error).  In either case, the headers are sent, making the
@@ -273,5 +273,5 @@ def test(HandlerClass = SimpleHTTPRequestHandler,
     http.server.test(HandlerClass, ServerClass)
  
 if __name__ == '__main__':
-    server = http.server.HTTPServer(('172.31.66.53', 8181), SimpleHTTPRequestHandler)
+    server = http.server.HTTPServer(('localhost', 8181), SimpleHTTPRequestHandler)
     server.serve_forever()
