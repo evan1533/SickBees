@@ -1,33 +1,18 @@
+from scipy.io import wavfile as scp
+import numpy
 import math
-#sudo apt-get install python-pyaudio
-from pyaudio import PyAudio
+import cmath
 
-#See http://en.wikipedia.org/wiki/Bit_rate#Audio
-BITRATE = 16000 #number of frames per second/frameset.      
+index = 40000
+[rate,array] = scp.read("c.wav")
+temp = [0]*int(rate/20)
+for i in range(len(temp)):
+	temp[i] = array[index]
+	index = index +1
+for f in range(10,4096):
+	sum = 0
+	for t in range(len(temp)):
+		sum = sum + array[t]*numpy.real(cmath.exp(-2*math.pi*cmath.sqrt(-1)*(t/rate)*f))
 
-#See http://www.phy.mtu.edu/~suits/notefreqs.html
-FREQUENCY = 4.00 #Hz, waves per second, 261.63=C4-note.
-LENGTH = 1/2 #seconds to play sound
-
-NUMBEROFFRAMES = int(BITRATE * LENGTH)
-RESTFRAMES = NUMBEROFFRAMES % BITRATE
-WAVEDATA = ''    
-
-for x in range(NUMBEROFFRAMES):
-   WAVEDATA += chr(int(math.sin(x / ((BITRATE / FREQUENCY) / math.pi)) * 127 + 128))    
-
-#fill remainder of frameset with silence
-for x in range(RESTFRAMES): 
-    WAVEDATA += chr(128)
-
-p = PyAudio()
-stream = p.open(
-    format=p.get_format_from_width(1),
-    channels=1,
-    rate=BITRATE,
-    output=True,
-    )
-stream.write(WAVEDATA)
-stream.stop_stream()
-stream.close()
-p.terminate()
+	result = sum/(len(temp))
+	print(result," ",f)
