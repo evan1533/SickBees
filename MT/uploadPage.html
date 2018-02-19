@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+      function playAudio3() {
+          console.log('asdf');
+    var music = document.getElementById('music1019');
+    var otherM = document.getElementById('Crayon');
+    var fName = (otherM.value).substring(12,(otherM.value).length);
+    console.log(fName);
+    var sauce = "http://localhost:8090/"+fName
+    document.getElementById('Sus').src = sauce;
+    music.play();
+}
+  </script>
+  <meta charset="UTF-8">
+  <title>The Three W's</title>
+  <link rel="stylesheet" type="text/css" href="path to css stylesheet">
+</head>
+<body>
+<audio id="music1019" autobuffer="false" preload="none" title="Play the AM piano chord">
+<source id="Sus" src="http://localhost:8090/" type="audio/wav">
+</audio>
+  <h1>
+    The Three W's
+  </h1>
+  <h2>
+    Word, Were, Work.
+  </h2>
+  <form ENCTYPE="multipart/form-data" method="post">
+  <div>
+    <input id="Crayon" name="file" type="file" accept=".wav">
+  </div>
+  <div>
+    <input type="submit" value="upload"/>
+    </form>
+  </div>
+  <p>Enter a .wav file above</p>
+</body>
+</html>
