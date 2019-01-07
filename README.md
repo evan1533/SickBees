@@ -1,4 +1,4 @@
-# SickBees
+# Song Player
 what else could you want?
 
 To resolve the merge conflict blue script.
@@ -56,7 +56,7 @@ u
 Undo last action
 
 J
-Join current and next lines (Note the capital — hold the Shift key)
+Join current and next lines (Note the capital â€” hold the Shift key)
 
 Saving and Quitting
 
